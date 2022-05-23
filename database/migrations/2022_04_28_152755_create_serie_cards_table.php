@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idcard');
             $table->string('num_card');
+            $table->string('receive')->nullable();
+            $table->string('num_cmpt')->nullable();
+            $table->string('statut')->nullable();
             $table->timestamps();
 
             $table->foreign('idcard')->references('id')->on('visa_cards')->onDelete('cascade');

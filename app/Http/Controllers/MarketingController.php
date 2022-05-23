@@ -42,7 +42,7 @@ class MarketingController extends Controller
 
     public function seg_card($segment)
     {
-        $visacard = VisaCard::where('segment_card','=',$segment)->get();
+        $visacard = VisaCard::where('segment_card','=',$segment)->where('idreceive','=',session('marketing'))->get();
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
         return view('marketing.segment', $data)->with('visacard', $visacard);
     }
@@ -77,16 +77,42 @@ class MarketingController extends Controller
 
     public function view_demandes()
     {
-        $visademande = demandes::all();
+        
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
 
-        $id = '';
-        foreach ($visademande as $key) {
-            $id = $key->iddemandeur;
-        }
-        $user = ['demandeur'=>Acteurs::where('id','=',$id)->first()];
-        return view('marketing.demande', $data,$user)->with('visademande', $visademande);
+        $visademande =  demandes::join('acteurs', 'acteurs.id', '=', 'demandes.iddemandeur')
+                        ->get(['demandes.*', 'acteurs.name_acteur', 'acteurs.role_acteur']);
+                        
+        return view('marketing.demande', $data)->with('visademande', $visademande);
     }
+
+    public function traitement_demande($id)
+    {
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $accept_ask = demandes::where('id', $id)
+                                ->limit(1)
+                                ->update(array('statut' => '1'));
+
+        $askceur = ['InfoAskceur'=>demandes::where('id', $id)->first()];
+        
+        $visacard = VisaCard::where('idreceive','=',session('marketing'))->get();
+
+        return view('marketing.transmission', $data,$askceur)->with('visacard', $visacard);
+    }
+
+    public function share_demande($id, $idask)
+    {
+        $sendStock = VisaCard::where('id', $id)
+                                ->limit(1)  // optional - to ensure only one record is updated.
+                                ->update(array('idreceive' => $idask));
+
+        if ($sendStock) {
+            return back()->with('success','Demande traitée et stock transmis avec succès');
+        }else {
+            return back()->with('fail','Une erreur est survenue, ressayez plutard');
+        }
+    }
+
 
     public function saving(Request $request)
     {
@@ -129,9 +155,9 @@ class MarketingController extends Controller
        }
 
        if ($save && $save2) {
-        return back()->with('success','Carte visa enregistré avec succès');
+            return back()->with('success','Carte visa enregistré avec succès');
        }else {
-           return back()->with('fail','Echec sauvegarde, ressayez plutard');
+            return back()->with('fail','Echec sauvegarde, ressayez plutard');
        }
     }
 }

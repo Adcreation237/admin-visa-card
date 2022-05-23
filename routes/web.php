@@ -34,6 +34,8 @@ Route::group(['middleware'=>['Makauth']], function(){
     Route::get('/marketing/seg-card/{segment}',[MarketingController::class, 'seg_card']);
     Route::get('/marketing/seg-card-detail/{id}',[MarketingController::class, 'show_card']);
     Route::post('/marketing/save',[MarketingController::class, 'saving'])->name('saving');
+    Route::get('/marketing/traitement/{id}',[MarketingController::class, 'traitement_demande']);
+    Route::get('/marketing/share/{id}{idask}',[MarketingController::class, 'share_demande']);
     /*Route::post('/marketing/search_card',[MarketingController::class, 'search_card'])->name('search_card');*/
 });
 
@@ -48,5 +50,8 @@ Route::group(['middleware'=>['Managerauth']], function(){
 
     Route::get('/branch_manager/demander',[ManagerController::class, 'ask_card'])->name('demander');
     Route::post('/branch_manager/sending',[ManagerController::class, 'send'])->name('sending');
-    Route::get('/branch_manager/view-card',[ManagerController::class, 'view_card'])->name('view.card');
+    Route::get('/branch_manager/view-card-branch',[ManagerController::class, 'view_card_branch'])->name('view.card_branch');
+    Route::get('/branch_manager/receive/{id}',[ManagerController::class, 'receive']);
+    Route::get('/marketing/seg-card-detail-branch/{id}',[ManagerController::class, 'show_card_branch']);
+    Route::get('/marketing/trans-card',[ManagerController::class, 'trans_card_branch'])->name('trans.card');
 });

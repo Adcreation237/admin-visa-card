@@ -2,6 +2,22 @@
 @section('body-start')
 <div class="container mt-5">
 
+    <div class="col-12">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-emoji-smile-fill me-2"></i>
+                {{session('success')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if (session('fail'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                {{session('fail')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
     <div class="container">
         <!-- Tabs navs -->
         <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
@@ -46,6 +62,9 @@
                                     <td><a href="/marketing/seg-card-detail/{{$item->id}}" class="text-warning"><i class="bi bi-circle-fill me-2"></i>en attente</a></td>
                                 @endif
                                 @if ($item->statut == 1)
+                                    <td><a href="/marketing/seg-card-detail/{{$item->id}}" class="text-primary"><i class="bi bi-circle-fill me-2"></i>En attente de confirmation</a></td>
+                                @endif
+                                @if ($item->statut == 2)
                                     <td><a href="/marketing/seg-card-detail/{{$item->id}}" class="text-success"><i class="bi bi-circle-fill me-2"></i>traitée</a></td>
                                 @endif
                                 @if ($item->statut == 3)
@@ -60,9 +79,16 @@
             <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
 
                 @foreach($valideAsk as $item)
-                <div class="alerte alert-success" role="alert">
-                    A simple success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-                </div>
+                    @if ($item->statut == 1)
+                        <div class="alerte alert-primary" role="alert">
+                            Votre demande de <b>{{$item->nbre_card}}</b> a été approuvée ! Pour recevoir le stock,  <u><a href="receive/{{$item->id}}" class="alert-link">Confirmez la reception</a></u>.
+                        </div>
+                    @endif
+                    @if ($item->statut == 2)
+                        <div class="alerte alert-success" role="alert">
+                            Merci d'avoir confirmé votre commande, veuillez consulter votre stock.
+                        </div>
+                    @endif
                 @endforeach
             </div>
 
@@ -75,6 +101,7 @@
                             <th scope="col">Date de validité</th>
                             <th scope="col">Date d'expiration</th>
                             <th scope="col">Branche</th>
+                            <th scope="col">Segment</th>
                             <th scope="col">Distribution</th>
                             <th scope="col">Series</th>
                         </tr>
@@ -83,11 +110,12 @@
                         @foreach($visacard as $item)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->date_start }}</a></td>
-                                <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->date_start }}</a></td>
-                                <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->branch_partner }}</a></td>
-                                <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->branch_distri }}</a></td>
-                                <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->first_num }} - {{ $item->last_num }}</a></td>
+                                <td><a href="/marketing/seg-card-detail-branch/{{$item->id}}">{{ $item->date_start }}</a></td>
+                                <td><a href="/marketing/seg-card-detail-branch/{{$item->id}}">{{ $item->date_start }}</a></td>
+                                <td><a href="/marketing/seg-card-detail-branch/{{$item->id}}">{{ $item->branch_partner }}</a></td>
+                                <td><a href="/marketing/seg-card-detail-branch/{{$item->id}}">{{ $item->segment_card }}</a></td>
+                                <td><a href="/marketing/seg-card-detail-branch/{{$item->id}}">{{ $item->branch_distri }}</a></td>
+                                <td><a href="/marketing/seg-card-detail-branch/{{$item->id}}">{{ $item->first_num }} - {{ $item->last_num }}</a></td>
                             </tr>
                         @endforeach
                     </tbody>
