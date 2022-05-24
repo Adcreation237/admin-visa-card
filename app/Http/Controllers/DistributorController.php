@@ -25,27 +25,33 @@ class DistributorController extends Controller
         $location=  $_GET['location'];
         $acteurid =  $_GET['acteurid'];
         $id = Acteurs::where('localisation','=',$location)->where('role_acteur','=','branch_manager')->get('id');
+        
+        $getid='';
+        foreach($id as $item){
+            $getid = $item['id'];
+        }
+
         $request->validate([
             'segment'=>'required',
             'nbre_card'=>'required|integer',
         ]);
 
-        echo $location.' '.$acteurid.' '.$id;
+        echo $location.' '.$acteurid.' '.$getid;
 
         //insert demande acceuil
-    //     $ask = new demandes();
-    //     $ask->iddemandeur = $acteurid;
-    //     $ask->idreceive = $request->idrespo;
-    //     $ask->segment = $request->segment;
-    //     $ask->nbre_card = $request->nbre_card;
-    //     $ask->statut = '0';
-    //     $save = $ask->save();
+        $ask = new demandes();
+        $ask->iddemandeur = $acteurid;
+        $ask->idreceive = $getid;
+        $ask->segment = $request->segment;
+        $ask->nbre_card = $request->nbre_card;
+        $ask->statut = '0';
+        $save = $ask->save();
 
-    //    if ($save) {
-    //     return back()->with('success','Carte visa enregistré avec succès');
-    //    }else {
-    //        return back()->with('fail','Echec sauvegarde, ressayez plutard');
-    //    }
+       if ($save) {
+        return back()->with('success','Carte visa enregistré avec succès');
+       }else {
+           return back()->with('fail','Echec sauvegarde, ressayez plutard');
+       }
     }
     
 }

@@ -8,6 +8,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Demande carte</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('distributor') }}">Mes demandes</a>
+        </li>
     <div class="row">
         <div class="col-6 text-right p-5">
 
