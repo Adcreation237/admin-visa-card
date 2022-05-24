@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,7 @@ Route::post('/start',[AuthController::class, 'login_action'])->name('login.actio
 Route::group(['middleware'=>['Makauth']], function(){
     Route::get('/',[AuthController::class, 'login'])->name('login');
     Route::get('/logout',[AuthController::class, 'logout'])->name('login.logout');
-    Route::get('/marketing/',[MarketingController::class, 'marketing'])->name('home');
-    Route::get('/marketing/home',[MarketingController::class, 'marketing'])->name('home');
+    Route::get('/marketing',[MarketingController::class, 'marketing'])->name('marketing');
     Route::get('/marketing/profile',[MarketingController::class, 'profile'])->name('profile');
     Route::get('/marketing/settings',[MarketingController::class, 'setting'])->name('setting');
 
@@ -42,8 +42,7 @@ Route::group(['middleware'=>['Makauth']], function(){
 Route::group(['middleware'=>['Managerauth']], function(){
     Route::get('/',[AuthController::class, 'login'])->name('login');
     Route::get('/logout',[AuthController::class, 'logout'])->name('login.logout');
-    Route::get('/branch_manager/',[ManagerController::class, 'branch_manager'])->name('home');
-    Route::get('/branch_manager/home',[ManagerController::class, 'branch_manager'])->name('home');
+    Route::get('/branch_manager',[ManagerController::class, 'branch_manager'])->name('branch_manager');
     Route::get('/branch_manager/profile',[ManagerController::class, 'profile'])->name('profile');
     Route::get('/branch_manager/settings',[ManagerController::class, 'setting'])->name('setting');
 
@@ -54,4 +53,13 @@ Route::group(['middleware'=>['Managerauth']], function(){
     Route::get('/branch_manager/receive/{id}',[ManagerController::class, 'receive']);
     Route::get('/marketing/seg-card-detail-branch/{id}',[ManagerController::class, 'show_card_branch']);
     Route::get('/marketing/trans-card',[ManagerController::class, 'trans_card_branch'])->name('trans.card');
+});
+
+
+Route::group(['middleware'=>['Distributorauth']], function(){
+    Route::get('/',[AuthController::class, 'login'])->name('login');
+    Route::get('/logout',[AuthController::class, 'logout'])->name('login.logout');
+    Route::get('/distributor/',[DistributorController::class, 'distributor'])->name('distributor');
+    Route::get('/distributor/demande_card',[DistributorController::class, 'ask_card'])->name('demande_distributor');
+    Route::post('/distributor/opera_demande',[DistributorController::class, 'opera_demande'])->name('opera_demande');
 });

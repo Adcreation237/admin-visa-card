@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iddemandeur');
+            $table->unsignedBigInteger('idreceive');
             $table->string('segment');
             $table->string('nbre_card');
             $table->string('statut');
             $table->timestamps();
 
             $table->foreign('iddemandeur')->references('id')->on('acteurs')->onDelete('cascade');
+            $table->foreign('idreceive')->references('id')->on('acteurs')->onDelete('cascade');
             Schema::enableForeignKeyConstraints();
         });
     }

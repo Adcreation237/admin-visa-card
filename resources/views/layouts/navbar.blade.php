@@ -20,7 +20,7 @@
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="{{ route('home') }}">
+            <a class="navbar-brand mt-2 mt-lg-0" href="/{{$InfoActeur['role_acteur']}}">
                 <img src="{{asset('img/cremincam.png')}}" height="40" loading="lazy" />
             </a>
         </div>

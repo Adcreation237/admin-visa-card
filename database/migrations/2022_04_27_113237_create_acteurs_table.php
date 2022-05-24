@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('role_acteur');
             $table->string('code_acteur');
             $table->string('mdp_acteur');
+            $table->string('localisation');
             $table->string('start');
             $table->timestamps();
         });

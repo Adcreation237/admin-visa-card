@@ -1,0 +1,13 @@
+INSERT INTO `acteurs` (`id`, `name_acteur`, `role_acteur`, `code_acteur`, `mdp_acteur`, `localisation`, `start`, `created_at`, `updated_at`) 
+VALUES 
+(NULL, 'MISOM LIDYA', 'marketing', '000001', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Direction', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'NTAP RUBEN', 'manager', '000002', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Direction', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'VALENTINE OKALE', 'manager', '000003', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Direction', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'PALAI BARTHELEMY', 'controler', '000004', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Direction', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'INFORMATIQUE', 'software', '000005', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Direction', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'BOBBO OUSMAN', 'branch_manager', '000006', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Garoua', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'FOM ROBERT', 'branch_manager', '000007', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Douala', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'NDZIA EBENEZER', 'branch_manager', '000008', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Yaounde', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'YASMINE', 'distributor', '000009', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Garoua', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'JULIENNE', 'distributor', '000010', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Douala', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24'),
+(NULL, 'TOLO JOELLE', 'distributor', '000011', '$2a$04$qLuGIFqSHb/30HwYHkD.vOg6dNU5KP4gQZiMn.G0/c7D7jKL1Q3Iu', 'Yaounde', 'true', '2022-05-24 17:36:24', '2022-05-24 17:36:24');

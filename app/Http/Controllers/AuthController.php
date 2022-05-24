@@ -15,12 +15,19 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        if (session()->has('marketing')) {
-            session()->pull('marketing');
+        if (session()->has('acteurs')) {
+            session()->pull('acteurs');
+            session()->pull('acteursid');
             return redirect('/');
         }
-        if (session()->has('branch_manager')) {
-            session()->pull('branch_manager');
+        if (session()->has('acteurs')) {
+            session()->pull('acteurs');
+            session()->pull('acteursid');
+            return redirect('/');
+        }
+        if (session()->has('acteurs')) {
+            session()->pull('acteurs');
+            session()->pull('acteursid');
             return redirect('/');
         }
     }
@@ -40,8 +47,9 @@ class AuthController extends Controller
         } else {
             if (Hash::check($request->mdp_acteur, $userInfo->mdp_acteur)) {
                 if (($userInfo->start)=='true') {
-                        $request->session()->put($userInfo->role_acteur, $userInfo->id);
-                        return redirect('/'.$userInfo->role_acteur.'/home');
+                        $request->session()->put('acteursid', $userInfo->id);
+                        $request->session()->put('acteurs', $userInfo->role_acteur);
+                        return redirect('/'.$userInfo->role_acteur.'/');
                 }else{
                     return back()->with('fail','Désolé ! Compte inactif, veuillez vous rapprocher de la Direction');
                 }

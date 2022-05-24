@@ -12,45 +12,45 @@ class MarketingController extends Controller
 {
     public function marketing()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('marketing.home', $data);
     }
     public function profile()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('marketing.profile', $data);
     }
     public function setting()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('marketing.setting', $data);
     }
 
 
     public function save_card()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('marketing.save', $data);
     }
 
     public function view_card()
     {
         $segment = ['Segment1','Segment2','Segment3'];
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('marketing.view', $data)->with('segment', $segment);
     }
 
     public function seg_card($segment)
     {
-        $visacard = VisaCard::where('segment_card','=',$segment)->where('idreceive','=',session('marketing'))->get();
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $visacard = VisaCard::where('segment_card','=',$segment)->where('idreceive','=',session('acteursid'))->get();
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('marketing.segment', $data)->with('visacard', $visacard);
     }
 
     public function show_card($id)
     {
         $visacardid = serieCard::where('idcard','=',$id)->get();
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
 
         return view('marketing.segview', $data)->with('visacardid', $visacardid);
     }
@@ -78,7 +78,7 @@ class MarketingController extends Controller
     public function view_demandes()
     {
         
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
 
         $visademande =  demandes::join('acteurs', 'acteurs.id', '=', 'demandes.iddemandeur')
                         ->get(['demandes.*', 'acteurs.name_acteur', 'acteurs.role_acteur']);
@@ -88,14 +88,14 @@ class MarketingController extends Controller
 
     public function traitement_demande($id)
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('marketing'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         $accept_ask = demandes::where('id', $id)
                                 ->limit(1)
                                 ->update(array('statut' => '1'));
 
         $askceur = ['InfoAskceur'=>demandes::where('id', $id)->first()];
         
-        $visacard = VisaCard::where('idreceive','=',session('marketing'))->get();
+        $visacard = VisaCard::where('idreceive','=',session('acteursid'))->get();
 
         return view('marketing.transmission', $data,$askceur)->with('visacard', $visacard);
     }

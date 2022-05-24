@@ -12,23 +12,23 @@ class ManagerController extends Controller
 {
     public function branch_manager()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('branch_manager.home', $data);
     }
     public function profile()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('branch_manager.profile', $data);
     }
     public function setting()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('branch_manager.setting', $data);
     }
 
     public function ask_card()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('branch_manager.demander', $data);
     }
 
@@ -57,10 +57,10 @@ class ManagerController extends Controller
 
     public function view_card_branch()
     {
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
-        $visacard = VisaCard::where('idreceive','=',session('branch_manager'))->get();
-        $demandes = demandes::where('iddemandeur','=',session('branch_manager'))->get();
-        $valideAsk = demandes::where('iddemandeur','=',session('branch_manager'))->get();
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
+        $visacard = VisaCard::where('idreceive','=',session('acteursid'))->get();
+        $demandes = demandes::where('iddemandeur','=',session('acteursid'))->get();
+        $valideAsk = demandes::where('iddemandeur','=',session('acteursid'))->get();
         return view('branch_manager.viewcard', $data)
                 ->with('visacard',$visacard)
                 ->with('demandes',$demandes)
@@ -83,7 +83,7 @@ class ManagerController extends Controller
     public function show_card_branch($id)
     {
         $visacardid = serieCard::where('idcard','=',$id)->get();
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
 
         return view('branch_manager.seg_detail', $data)->with('visacardid', $visacardid);
     }
@@ -91,8 +91,8 @@ class ManagerController extends Controller
     
     public function trans_card_branch(){
         
-        $visacard = VisaCard::where('idreceive','=',session('branch_manager'))->get();
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('branch_manager'))->first()];
+        $visacard = VisaCard::where('idreceive','=',session('acteursid'))->get();
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         
 
         return view('branch_manager.card_trans', $data)->with('visacard', $visacard);
