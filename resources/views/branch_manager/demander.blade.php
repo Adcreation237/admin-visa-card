@@ -1,6 +1,17 @@
 @extends('layouts.navbar')
 @section('body-start')
 <div class="container p-5 mb-4">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('branch_manager') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Demande carte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('myasker') }}">Mes demandes</a>
+        </li>
+    </ul>
     <div class="row">
         <div class="col-6 text-right p-5">
 
@@ -24,7 +35,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-                <form action="{{ route('sending') }}" method="post">
+                <form action="{{ route('sending', ['acteurid'=>$InfoActeur['id']]) }}" method="post">
                     @csrf
                     <div class="row mb-4">
                         <div class="col">
@@ -50,9 +61,6 @@
                     <div class="row">
                         <div class="col-8">
                             <h4><i class="bi bi-exclamation-triangle-fill text-danger mx-2"></i>Rassurer vous d'avoir pris le bon Segment</h4>
-                        </div>
-                        <div class="col-1">
-                            <input class="inputid" type="text" id="idrespo" name="idrespo" value="{{$InfoActeur['id']}}" readonly>
                         </div>
                     </div>
                     <hr />

@@ -28,26 +28,17 @@
 
         <!-- Right elements -->
         <div class="d-flex align-items-center">
-
-            <!-- Notifications -->
-            <a
-                class="text-reset me-3 dropdown-toggle hidden-arrow"
-                href="#"
-            >
-                <i class="bi bi-bell text-light"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
-            </a>
             <!-- Avatar -->
-            <div class="dropdown">
-            <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-white"
+            <div class="dropdown  me-3 ">
+            <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-white text-uppercase"
                 href="#"
                 id="navbarDropdownMenuAvatar"
                 role="button"
                 data-mdb-toggle="dropdown"
                 aria-expanded="false"
             >
-            {{$InfoActeur['role_acteur']}}
-                <img src="{{asset('img/cremin.png')}}" class="rounded-circle" height="25" loading="lazy"/>
+            
+            <span class="text-white">{{$InfoActeur['name_acteur']}} - {{$InfoActeur['role_acteur']}} {{$InfoActeur['localisation']}}</span>
             </a>
             <ul
                 class="dropdown-menu dropdown-menu-end"
@@ -64,6 +55,15 @@
                 </li>
             </ul>
             </div>
+            
+            <!-- Notifications -->
+            <a
+                class="text-reset dropdown-toggle hidden-arrow"
+                href="#"
+            >
+                <i class="bi bi-bell text-light"></i>
+                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            </a>
         </div>
         <!-- Right elements -->
         </div>

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('serie_cards', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idcard');
+            $table->unsignedBigInteger('idgestion');
+            $table->string('segment');
             $table->string('num_card');
             $table->string('receive')->nullable();
             $table->string('num_cmpt')->nullable();
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('idcard')->references('id')->on('visa_cards')->onDelete('cascade');
+            $table->foreign('idgestion')->references('id')->on('acteurs')->onDelete('cascade');
 
             Schema::enableForeignKeyConstraints();
         });

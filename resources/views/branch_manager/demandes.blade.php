@@ -1,12 +1,15 @@
 @extends('layouts.navbar')
 @section('body-start')
-<div class="container px-5 py-3 mb-2">
+<div class="container p-5 mb-4">
     <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link" href="{{ route('branch_manager') }}">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Demandes Recues</a>
+          <a class="nav-link" href="{{ route('demander') }}">Demande carte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Mes demandes</a>
         </li>
     </ul>
 
@@ -28,14 +31,13 @@
             @endif
         </div>
         <div class="col">
-            <h2 class='mb-4 mt-5 text-right'><b>Mes demandes <u class="text-danger">reçues</u></b></h2>
+            <h2 class='mb-4 mt-5 text-right'><b>Mes demandes <u class="text-primary">envoyées</u></b></h2>
         </div>
     </div>
     <table id="dtBasicExample" class="table" width="100%">
         <thead>
             <tr>
                 <th scope="col">N°</th>
-                <th scope="col">Service</th>
                 <th scope="col">Date d'envoie</th>
                 <th scope="col">Nombre de carte</th>
                 <th scope="col">Segment</th>
@@ -47,7 +49,6 @@
             @foreach($myask as $item)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $item->name_acteur }} - {{ $item->role_acteur }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>{{ $item->segment }}</td>
                     <td>{{ $item->nbre_card }}</td>
@@ -75,25 +76,21 @@
                         @endif   
                     </td>
                     <td>
-                        @if ($item->statut == 3)
-                        <span>Demande Annulée</span>
-                        @endif
-
                         @if ($item->statut == 1)
-                        <span>Demande Traitée</span>
+                            <a href="{{ route('confirme_ask', ['id'=>$item->id]) }}"  class="btner btn-primary text-white">
+                                confirmer
+                            </a>
                         @endif
                         
                         @if ($item->statut == 2)
-                            <span>Demande Confirmée</span>
+                            <span>Deja Confirmée</span>
                         @endif
 
                         @if ($item->statut == 0)
-                        <a href="{{ route('treated_ask', ['id'=>$item->id]) }}"  class="text-primary fs-4" title="Traiter">
-                            <i class="bi bi-arrow-clockwise"></i>
-                        </a>
-                        <a href="{{ route('trash_ask', ['id'=>$item->id]) }}"  class="text-danger fs-4" title="Annuler">
-                            <i class="bi bi-trash-fill"></i>
-                        </a>
+                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            En cours...
                         @endif
                     </td>
                 </tr>

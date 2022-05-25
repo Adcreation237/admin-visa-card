@@ -19,7 +19,7 @@
                   <p class="card-text" style="font-size: 12px; text-align: justify">Cette consultation
                     se fait suivant un segment precis et une série de carte précise. Veuillez bien lire
                     avant de valider !</p>
-                  <a href="{{ route('view.card_branch') }}" class="card-link">Commencer</a>
+                  <a href="{{ route('mystock') }}" class="card-link">Commencer</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                   <p class="card-text" style="font-size: 12px; text-align: justify">Cet transmission se fait par carte en fonction du
                     segment et du numéro de carte. Veuillez bien lire
                     avant de valider !</p>
-                  <a href="{{ route('trans.card') }}" class="card-link">Commencer</a>
+                  <a href="{{ route('distribute') }}" class="card-link">Commencer</a>
                 </div>
             </div>
         </div>

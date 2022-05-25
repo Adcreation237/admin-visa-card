@@ -150,6 +150,9 @@ class MarketingController extends Controller
             $seriecard = new serieCard();
 
             $seriecard->idcard = $visacard->id;
+            $seriecard->idgestion = $visacard->id;
+            $seriecard->segment = $request->segment;
+            $seriecard->statut = 0;
             $seriecard->num_card = $request->first_num+$i;
             $save2 = $seriecard->save();
        }

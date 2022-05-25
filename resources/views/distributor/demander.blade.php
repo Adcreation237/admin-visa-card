@@ -9,8 +9,9 @@
           <a class="nav-link active" aria-current="page" href="#">Demande carte</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('distributor') }}">Mes demandes</a>
+          <a class="nav-link" href="{{ route('myask') }}">Mes demandes</a>
         </li>
+    </ul>
     <div class="row">
         <div class="col-6 text-right p-5">
 
