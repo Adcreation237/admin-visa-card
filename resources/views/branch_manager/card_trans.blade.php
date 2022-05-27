@@ -57,22 +57,19 @@
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                             En cours...
-                        @endif  
+                        @endif
 
                         @if ($item->statut == 1)
                             <i class="bi bi-check-lg text-success fs-4"></i>Traitée
                         @endif
 
                         @if ($item->statut == 2)
-                            <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            Traitement en cours...   
-                        @endif  
+                            Traitement terminée
+                        @endif
 
                         @if ($item->statut == 3)
                             <i class="bi bi-archive-fill text-danger fs-6 me-1"></i>Annulée
-                        @endif   
+                        @endif
                     </td>
                     <td>
                         @if ($item->statut == 3)
@@ -82,7 +79,7 @@
                         @if ($item->statut == 1)
                         <span>Demande Traitée</span>
                         @endif
-                        
+
                         @if ($item->statut == 2)
                             <span>Demande Confirmée</span>
                         @endif

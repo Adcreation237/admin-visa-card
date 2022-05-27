@@ -23,7 +23,7 @@
     </div>
     <table id="dtBasicExample" class="table" width="100%">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">N°</th>
                 <th scope="col" rowspan="2">Gérant</th>
                 <th scope="col">numero de la carte</th>
@@ -34,7 +34,7 @@
         </thead>
         <tbody>
             @foreach($seriecard as $item)
-                <tr>
+                <tr class="text-center">
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $item->name_acteur }} - {{ $item->role_acteur }}</td>
                     <td>{{ $item->num_card }}</td>
@@ -42,12 +42,25 @@
                     <td>
                         @if ($item->statut == 0)
                             <span class="text-danger">Pas vendu</span>
-                        @endif    
+                        @endif
+                        @if ($item->statut == 1)
+                            <span class="text-primary">Carte attribuée</span>
+                        @endif
                     </td>
-                    <td>
-                        <a href="{{ route('trans_card', ['id'=>$item->id, 'idask'=>$iddemande]) }}"  class="text-primary fs-4" title="transférer">
-                            <i class="bi bi-send-fill"></i>
-                        </a>
+                    <td class="text-center">
+                        @if ($item->idgestion == $InfoActeur['id'])
+                            <a href="{{ route('trans_card', ['id'=>$item->id, 'idask'=>$iddemande]) }}"  class="text-primary fs-4" title="transférer">
+                                <i class="bi bi-send-fill"></i>
+                            </a>
+                        @elseif ($item->statut == 1)
+                            <a href="{{ route('vendre', ['id'=>$item->id]) }}"  class="text-success fs-4" title="valider la vente" data-bs-toggle="tooltip" data-bs-placement="right">
+                                <i class="bi bi-check-square-fill"></i>
+                            </a>
+                        @else
+                            Carte transférée
+                        @endif
+
+
                     </td>
                 </tr>
             @endforeach

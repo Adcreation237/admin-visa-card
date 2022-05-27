@@ -49,7 +49,7 @@ Route::group(['middleware'=>['Managerauth']], function(){
     //Faire une demande et envoyer
     Route::get('/branch_manager/demander',[ManagerController::class, 'ask_card'])->name('demander');
     Route::post('/branch_manager/sending',[ManagerController::class, 'send'])->name('sending');
-    
+
     //voir les demandes et confirmer la reception
     Route::get('/branch_manager/myasker',[ManagerController::class, 'myasker'])->name('myasker');
     Route::get('/branch_manager/confirme_ask',[ManagerController::class, 'confirme_ask'])->name('confirme_ask');
@@ -62,9 +62,14 @@ Route::group(['middleware'=>['Managerauth']], function(){
     //Transferer une carte
     Route::get('/marketing/trans_card',[ManagerController::class, 'trans_card'])->name('trans_card');
 
+    //consulter les stocks de cartes recues
     Route::get('/branch_manager/view-card-branch',[ManagerController::class, 'view_card_branch'])->name('view.card_branch');
+    Route::get('/branch_manager/seg-card-detail-branch/{id}',[ManagerController::class, 'show_card_branch'])->name('show_card_branch');
+
+    //Vendre la carte
+    Route::get('/branch_manager/vendre/{id}',[ManagerController::class, 'vendre'])->name('vendre');
+
     Route::get('/branch_manager/receive/{id}',[ManagerController::class, 'receive']);
-    Route::get('/marketing/seg-card-detail-branch/{id}',[ManagerController::class, 'show_card_branch']);
 });
 
 
@@ -74,14 +79,15 @@ Route::group(['middleware'=>['Distributorauth']], function(){
     Route::get('/distributor',[DistributorController::class, 'distributor'])->name('distributor');
     Route::get('/distributor/demande_card',[DistributorController::class, 'ask_card'])->name('demande_distributor');
     Route::post('/distributor/opera_demande',[DistributorController::class, 'opera_demande'])->name('opera_demande');
-    
+
     Route::get('/distributor/myask',[DistributorController::class, 'myask'])->name('myask');
-    Route::get('/branch_manager/confirme_ask_ask_agence',[DistributorController::class, 'confirme_ask_ask_agence'])->name('confirme_ask_agence');
+    Route::get('/branch_manager/confirme_ask_agence',[DistributorController::class, 'confirme_ask_agence'])->name('confirme_ask_agence');
 
     Route::get('/distributor/mystock',[DistributorController::class, 'mystock'])->name('mystock');
     Route::get('/distributor/distribute',[DistributorController::class, 'distribute'])->name('distribute');
     Route::get('/distributor/attribue',[DistributorController::class, 'attribue'])->name('attribue');
+    Route::post('/distributor/selected/{id}',[DistributorController::class, 'selected'])->name('selected');
 
-    
+
     Route::post('/distributor/selling',[DistributorController::class, 'selling'])->name('selling');
 });

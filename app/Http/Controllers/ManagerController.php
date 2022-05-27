@@ -32,12 +32,12 @@ class ManagerController extends Controller
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         return view('branch_manager.demander', $data);
     }
-    
+
     //voir ses demandes
     public function myasker()
     {
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
-        
+
         $myask = demandes::where('iddemandeur','=',session('acteursid'))->get();
 
         return view('branch_manager.demandes', $data)->with('myask', $myask);
@@ -60,16 +60,16 @@ class ManagerController extends Controller
 
     //voir les demandes recues et traiter ou annuler
     public function trans_card_branch(){
-        
+
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
-        
+
         $myask =  demandes::join('acteurs', 'acteurs.id', '=', 'demandes.iddemandeur')
                         ->where('idreceive','=',session('acteursid'))
                         ->get(['demandes.*', 'acteurs.name_acteur', 'acteurs.role_acteur']);
 
         return view('branch_manager.card_trans', $data)->with('myask', $myask);
     }
-    
+
     //Annuler une demande
     public function trash_ask(){
         $acteurid =  $_GET['id'];
@@ -90,7 +90,7 @@ class ManagerController extends Controller
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
 
         $id = Acteurs::where('localisation','=','Yaounde')->where('role_acteur','=','distributor')->get('id');
-        
+
         $getid='';
         foreach($id as $item){
             $getid = $item['id'];
@@ -116,7 +116,7 @@ class ManagerController extends Controller
         $idtrans =  $_GET['id'];
 
         $id = Acteurs::where('localisation','=','Yaounde')->where('role_acteur','=','distributor')->get('id');
-        
+
         $getid='';
         foreach($id as $item){
             $getid = $item['id'];
@@ -126,13 +126,13 @@ class ManagerController extends Controller
                                 ->limit(1)
                                 ->update(array('idgestion' => $getid));
 
-        //confirme le traitement
-        $confAsk = demandes::where('id','=',$iddemande)
-                                ->where('idreceive','=',session('acteursid'))
-                                ->limit(1)
-                                ->update(array('statut' => 1));
 
-        if ($TransSerie && $confAsk) {
+        if ($TransSerie) {
+            //confirme le traitement
+            $confAsk = demandes::where('id','=',$iddemande)
+                                    ->where('idreceive','=',session('acteursid'))
+                                    ->limit(1)
+                                    ->update(array('statut' => 1));
             return back()->with('success','Cartes transférée avec succès !');
         }else {
             return back()->with('fail',"Echec transfère, ressayez plutard");
@@ -144,7 +144,7 @@ class ManagerController extends Controller
     {
         $acteurid =  $_GET['acteurid'];
         $id = Acteurs::where('role_acteur','=','marketing')->get('id');
-        
+
         $getid='';
         foreach($id as $item){
             $getid = $item['id'];
@@ -165,23 +165,43 @@ class ManagerController extends Controller
         $save = $ask->save();
 
        if ($save) {
-        return back()->with('success','Carte visa enregistré avec succès');
+        return back()->with('success','Demande enregistré avec succès');
        }else {
-           return back()->with('fail','Echec sauvegarde, ressayez plutard');
+           return back()->with('fail','Echec demande, ressayez plutard');
        }
-        
+
     }
 
+
+    //consulter le stock recu
     public function view_card_branch()
     {
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         $visacard = VisaCard::where('idreceive','=',session('acteursid'))->get();
-        $demandes = demandes::where('iddemandeur','=',session('acteursid'))->get();
-        $valideAsk = demandes::where('iddemandeur','=',session('acteursid'))->get();
         return view('branch_manager.viewcard', $data)
-                ->with('visacard',$visacard)
-                ->with('demandes',$demandes)
-                ->with('valideAsk',$valideAsk);
+                ->with('visacard',$visacard);
+    }
+
+    //consulter les cartes de facon détaillée
+    public function show_card_branch($id)
+    {
+        $visacardid = serieCard::where('idcard','=',$id)->get();
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
+
+        return view('branch_manager.seg_detail', $data)->with('visacardid', $visacardid);
+    }
+
+    //vendre la carte
+    public function vendre($id)
+    {
+        $update = serieCard::where('id','=',$id)
+                                ->limit(1)
+                                ->update(['statut' => 2]);
+        if ($update) {
+            return back()->with('success','Carte vendue avec succès');
+            }else {
+                return back()->with('fail','Echec vente, ressayez plutard');
+            }
     }
 
     public function receive($id)
@@ -197,14 +217,8 @@ class ManagerController extends Controller
         }
     }
 
-    public function show_card_branch($id)
-    {
-        $visacardid = serieCard::where('idcard','=',$id)->get();
-        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
 
-        return view('branch_manager.seg_detail', $data)->with('visacardid', $visacardid);
-    }
 
-    
-    
+
+
 }

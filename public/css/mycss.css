@@ -22,3 +22,53 @@
     border-radius: 20px;
     color: white;
 }
+
+.btner-2{
+    margin-top: 20px;
+    padding: 2% 20%;
+    border-radius: 20px;
+    color: white;
+}
+
+.hover{
+    width: 14.99rem;
+    height: 87%;
+    position: absolute;
+    background: rgba(58, 1, 1, 0.836);
+    z-index: 20;
+    border-radius: 10px;
+    text-align: center;
+    padding: 40px 0px;
+    color: white;
+    text-decoration: solid;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: bolder;
+    animation-duration: 1s;
+    animation-name: slidein;
+    animation-timing-function: ease-in-out;
+}
+
+.hover-2{
+    width: 14.99rem;
+    height: 87%;
+    position: absolute;
+    background: rgba(1, 77, 60, 0.836);
+    z-index: 20;
+    border-radius: 10px;
+    text-align: center;
+    padding: 60px 0px;
+    color: white;
+    text-decoration: solid;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: bolder;
+    animation-duration: 1s;
+    animation-name: slidein;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes slidein {
+    from {top: -100px;}
+    to {top: 0px;}
+  }

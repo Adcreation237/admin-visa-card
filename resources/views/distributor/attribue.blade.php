@@ -14,14 +14,17 @@
     </ul>
 
     <h2 class='mb-4 mt-5 text-right'><b>Mes stock <u class="text-primary">actuel</u></b></h2>
-    
+
     <div class="row">
         @foreach ($mystock as $item)
             <div class="col-3 my-2">
                 <div class="card mb-4" style="width: 18 rem; background: rgba(1, 11, 44, 0.87) url({{asset('img/bg-card.jpg')}}); background-size:cover; background-blend-mode: multiply; border-radius: 10px">
                     <div class="container p-2">
                         <div class="row">
-                            <div class="col-12 text-right mb-2">
+                            <div class="col-6 text-left mb-2 py-2">
+                                <h6 style="color: white ;font-family: cursive; font-size: 8px">{{ $item->receive }}</h6>
+                            </div>
+                            <div class="col-6 text-right mb-2">
                                 <img src="{{asset('img/cremincam.png')}}" height="20" loading="lazy" />
                             </div>
                             <div class="col-12 mb-2">
@@ -51,7 +54,7 @@
                     </div>
                 </div>
             </div>
-        @endforeach    
-    </div>   
+        @endforeach
+    </div>
 </div>
 @endsection
