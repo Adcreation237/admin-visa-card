@@ -65,12 +65,12 @@
 
         @foreach ($visacardid as $item)
         <div class="col-3 my-2">
-            @if ($item->statut==2)
+            @if ($item->statut == 2)
                 <div class="hover-2">
                     <h6>Carte vendue à <br><b>{{$item->receive}}</b></h6>
                 </div>
             @endif
-            @if ($item->statut==1)
+            @if ($item->statut == 1)
                 <div class="hover">
                     <h6>Carte attributée à <br><b>{{$item->receive}}</b></h6>
                     <a href="{{ route('vendre', ['id'=>$item->id]) }}" class="btner-2 btn-success">Vendre</a>

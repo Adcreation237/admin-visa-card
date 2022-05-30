@@ -55,12 +55,12 @@ Route::group(['middleware'=>['Managerauth']], function(){
     Route::get('/branch_manager/confirme_ask',[ManagerController::class, 'confirme_ask'])->name('confirme_ask');
 
     //traitement demandes cartes recues
-    Route::get('/marketing/trans-card',[ManagerController::class, 'trans_card_branch'])->name('trans.card');
-    Route::get('/marketing/trash_ask',[ManagerController::class, 'trash_ask'])->name('trash_ask');
-    Route::get('/marketing/treated_ask',[ManagerController::class, 'treated_ask'])->name('treated_ask');
+    Route::get('/branch_manager/trans-card',[ManagerController::class, 'trans_card_branch'])->name('trans.card');
+    Route::get('/branch_manager/trash_ask',[ManagerController::class, 'trash_ask'])->name('trash_ask');
+    Route::get('/branch_manager/treated_ask',[ManagerController::class, 'treated_ask'])->name('treated_ask');
 
     //Transferer une carte
-    Route::get('/marketing/trans_card',[ManagerController::class, 'trans_card'])->name('trans_card');
+    Route::get('/branch_manager/trans_card',[ManagerController::class, 'trans_card'])->name('trans_card');
 
     //consulter les stocks de cartes recues
     Route::get('/branch_manager/view-card-branch',[ManagerController::class, 'view_card_branch'])->name('view.card_branch');
@@ -68,6 +68,9 @@ Route::group(['middleware'=>['Managerauth']], function(){
 
     //Vendre la carte
     Route::get('/branch_manager/vendre/{id}',[ManagerController::class, 'vendre'])->name('vendre');
+
+    //consultation vente
+    Route::get('/branch_manager/ventes',[ManagerController::class, 'ventes'])->name('ventes');
 
     Route::get('/branch_manager/receive/{id}',[ManagerController::class, 'receive']);
 });

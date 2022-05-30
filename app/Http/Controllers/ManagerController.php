@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Acteurs;
 use App\Models\demandes;
 use App\Models\serieCard;
+use App\Models\Ventes;
 use App\Models\VisaCard;
 use Illuminate\Http\Request;
 
@@ -197,12 +198,72 @@ class ManagerController extends Controller
         $update = serieCard::where('id','=',$id)
                                 ->limit(1)
                                 ->update(['statut' => 2]);
-        if ($update) {
-            return back()->with('success','Carte vendue avec succès');
-            }else {
-                return back()->with('fail','Echec vente, ressayez plutard');
+
+        $idsegment = serieCard::where('id','=',$id)->get();
+
+        $amount = $segment = $name ='';
+        foreach ($idsegment as $value) {
+
+            $segment = $value->segment;
+            $name = $value->receive;
+
+            if ($value->segment == 'Segment3') {
+                $amount = 32000;
             }
+
+            if ($value->segment == 'Segment2') {
+                $amount = 19000;
+            }
+
+            if ($value->segment == 'Segment1') {
+                $amount = 13000;
+            }
+        }
+
+
+        $ventes = new Ventes();
+        $ventes->idseller = session('acteursid');
+        $ventes->idcard = $id;
+        $ventes->annee = date("Y");
+        $ventes->mois = date("m");
+        $ventes->jour = date("d");
+        $ventes->qte = 1;
+        $ventes->montant = $amount;
+
+        $save = $ventes->save();
+
+        $file ="./file/log_chef_agence_".session('acteursid').".txt";
+        $fileopen=(fopen("$file",'a+'));
+        fwrite($fileopen,"Vous avez vendu une carte de ".$segment." au compte de ".$name." au prix de ".$amount.";\n");
+        fclose($fileopen);
+
+        if ($update && $idsegment && $save) {
+            return back()->with('success','Carte vendue avec succès');
+        }else {
+            return back()->with('fail','Echec vente, ressayez plutard');
+        }
     }
+
+
+    //consultation ventes
+    public function ventes()
+    {
+        $ventes = Ventes::selectRaw('DAYNAME(`created_at`) AS dayname, SUM(montant) as amount')
+                        ->groupBy('dayname')
+                        ->get();
+        $element = $content = '';
+        foreach ($ventes as $value) {
+            $element = $value->dayname;
+            $content = $value->amount;
+        }
+
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
+        return view('branch_manager.consul_ventes', $data)
+                ->with('element',$element)
+                ->with('content',$content);
+    }
+
+
 
     public function receive($id)
     {

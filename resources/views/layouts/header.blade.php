@@ -29,10 +29,12 @@
 <body>
     @yield('container')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/mdb.min.js') }}"></script>
     <script src="{{ asset('js/myjs.js') }}"></script>
+    <script src="{{ asset('js/rapport_vente_1.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('mdb/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('mdb/js/popper.min.js') }}"></script>

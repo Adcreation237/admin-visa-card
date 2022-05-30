@@ -41,7 +41,7 @@
                   <p class="card-text" style="font-size: 12px; text-align: justify">Cet enregistrement
                     se fait suivant un segment precis et une série de carte précise. Veuillez bien lire
                     avant de valider !</p>
-                  <a href="#" class="card-link">Commencer</a>
+                  <a href="{{ route('ventes') }}" class="card-link">Commencer</a>
                 </div>
             </div>
         </div>
