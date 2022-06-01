@@ -37,7 +37,7 @@
                 data-mdb-toggle="dropdown"
                 aria-expanded="false"
             >
-            
+
             <span class="text-white">{{$InfoActeur['name_acteur']}} - {{$InfoActeur['role_acteur']}} {{$InfoActeur['localisation']}}</span>
             </a>
             <ul
@@ -55,7 +55,7 @@
                 </li>
             </ul>
             </div>
-            
+
             <!-- Notifications -->
             <a
                 class="text-reset dropdown-toggle hidden-arrow"
@@ -75,8 +75,8 @@
 <footer class="text-center text-white fixed-bottom">
 
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgb(0, 0, 0);">
-      © 2022 Copyright : ADMIN | VISA CARD
+    <div class="text-center p-2" style="background-color: rgb(0, 0, 0);">
+      © {{date('Y')}} Copyright : ADMIN | VISA CARD
     </div>
     <!-- Copyright -->
   </footer>

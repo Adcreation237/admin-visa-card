@@ -65,10 +65,7 @@
                         @endif
 
                         @if ($item->statut == 2)
-                            <div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            Traitement en cours...   
+                            Traitement terminé 
                         @endif  
 
                         @if ($item->statut == 3)

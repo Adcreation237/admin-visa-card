@@ -1,6 +1,14 @@
 @extends('layouts.navbar')
 @section('body-start')
     <div class="container p-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link " href="{{ route('marketing') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active disabled" href="#">Consultation cartes</a>
+            </li>
+          </ul>
         <div class="row mt-5">
             @foreach ($segment as $seg)
             <div class="col">

@@ -1,7 +1,15 @@
 @extends('layouts.navbar')
 @section('body-start')
-    <div class="container p-5 mb-4">
-        <div class="row">
+    <div class="container px-5 py-3 mb-4">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link " href="{{ route('marketing') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active disabled" href="#">Enregistrement carte</a>
+            </li>
+          </ul>
+        <div class="row mt-4">
             <div class="col-6">
                     <form action="{{ route('saving') }}" method="post">
                         @csrf

@@ -1,7 +1,15 @@
 @extends('layouts.navbar')
 @section('body-start')
 <div class="container py-5">
-    <div class="row">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link " href="{{ route('marketing') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active disabled" href="#">Consultation demandes</a>
+        </li>
+      </ul>
+    <div class="row mt-5">
         <div class="col">
             <table id="dtBasicExample" class="table" width="100%">@csrf
                 <thead>
@@ -33,12 +41,20 @@
                                 <td><a href="/marketing/seg-card-detail/{{$item->id}}" class="text-success"><i class="bi bi-circle-fill me-2"></i>reçu</a></td>
                             @endif
                             <td>
-                                <a href="traitement/{{$item->id}}" class="link-btn mx-2 text-danger text-center" >
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
-                                <a href="traitement/{{$item->id}}" class="link-btn mx-2 text-success">
-                                    <i class="bi bi-send-fill"></i>
-                                </a>
+                                
+                                @if ($item->statut == 0)
+                                    <a href="traitement/{{$item->id}}" class="link-btn mx-2 text-danger text-center" >
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                    <a href="traitement/{{$item->id}}" class="link-btn mx-2 text-success">
+                                        <i class="bi bi-send-fill"></i>
+                                    </a>
+                                @elseif ($item->statut == 1)
+                                    En attente de confirmation
+                                @else
+                                    Demande traitée
+                                @endif
+
                             </td>
                         </tr>
                     @endforeach

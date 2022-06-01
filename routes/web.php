@@ -27,15 +27,28 @@ Route::group(['middleware'=>['Makauth']], function(){
     Route::get('/marketing/profile',[MarketingController::class, 'profile'])->name('profile');
     Route::get('/marketing/settings',[MarketingController::class, 'setting'])->name('setting');
 
-    //Manage visa card
+    //save card
     Route::get('/marketing/save-card',[MarketingController::class, 'save_card'])->name('save.card');
-    Route::get('/marketing/view-card',[MarketingController::class, 'view_card'])->name('view.card');
-    Route::get('/marketing/view-demandes',[MarketingController::class, 'view_demandes'])->name('view.demandes');
-    Route::get('/marketing/seg-card/{segment}',[MarketingController::class, 'seg_card']);
-    Route::get('/marketing/seg-card-detail/{id}',[MarketingController::class, 'show_card']);
     Route::post('/marketing/save',[MarketingController::class, 'saving'])->name('saving');
+
+    //Consultation des cartes
+    Route::get('/marketing/view-card',[MarketingController::class, 'view_card'])->name('view.card');
+    Route::get('/marketing/seg-card/{segment}',[MarketingController::class, 'seg_card'])->name('segment-view');
+    Route::get('/marketing/seg-card-detail/{id}',[MarketingController::class, 'show_card']);
+
+    //Consultation des demandes
+    Route::get('/marketing/view-demandes',[MarketingController::class, 'view_demandes'])->name('view.demandes');
+
+    //Traitement d'une demande
     Route::get('/marketing/traitement/{id}',[MarketingController::class, 'traitement_demande']);
     Route::get('/marketing/share/{id}{idask}',[MarketingController::class, 'share_demande']);
+
+    //voir son historique de transactions
+    Route::get('/marketing/historik',[MarketingController::class, 'historik'])->name('historik');
+
+    //Gestion des utilisateurs
+    Route::get('/marketing/users',[MarketingController::class, 'users'])->name('users');
+
     /*Route::post('/marketing/search_card',[MarketingController::class, 'search_card'])->name('search_card');*/
 });
 

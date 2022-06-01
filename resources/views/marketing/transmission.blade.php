@@ -2,7 +2,15 @@
 @section('body-start')
 
 <div class="container py-5">
-    <div class="row">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link " href="{{ route('marketing') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{  url()->previous() }}">Consultation cartes</a>
+        </li>
+      </ul>
+    <div class="row mt-5">
         <div class="col-12">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">

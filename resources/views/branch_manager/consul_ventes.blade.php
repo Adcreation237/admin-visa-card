@@ -1,12 +1,22 @@
 @extends('layouts.navbar')
 @section('body-start')
     <div class="container p-5">
-        {{json_encode($content)}}
-        <canvas id="myChart" width="200" height="80">
-            <p>Hello Fallback World</p>
-        </canvas>
-    </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
 
+    </div>
 @endsection
 
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idreceive');
             $table->string('segment_card');
             $table->string('date_start');
+            $table->string('date_end');
             $table->string('num_bank');
             $table->string('branch_partner');
             $table->string('branch_distri');

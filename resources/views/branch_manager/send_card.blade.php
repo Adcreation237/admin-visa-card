@@ -25,7 +25,7 @@
         <thead>
             <tr class="text-center">
                 <th scope="col">N°</th>
-                <th scope="col" rowspan="2">Gérant</th>
+                <th scope="col">Gérant</th>
                 <th scope="col">numero de la carte</th>
                 <th scope="col">Segment</th>
                 <th scope="col">Statut</th>
@@ -41,10 +41,13 @@
                     <td>{{ $item->segment }}</td>
                     <td>
                         @if ($item->statut == 0)
-                            <span class="text-danger">Pas vendu</span>
+                            <span class="text-danger">Pas vendue</span>
                         @endif
                         @if ($item->statut == 1)
                             <span class="text-primary">Carte attribuée</span>
+                        @endif
+                        @if ($item->statut == 2)
+                            <span class="text-success">Carte vendue</span>
                         @endif
                     </td>
                     <td class="text-center">
@@ -52,11 +55,19 @@
                             <a href="{{ route('trans_card', ['id'=>$item->id, 'idask'=>$iddemande]) }}"  class="text-primary fs-4" title="transférer">
                                 <i class="bi bi-send-fill"></i>
                             </a>
-                        @elseif ($item->statut == 1)
+                        @endif
+
+                        @if ($item->statut == 1)
                             <a href="{{ route('vendre', ['id'=>$item->id]) }}"  class="text-success fs-4" title="valider la vente" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <i class="bi bi-check-square-fill"></i>
                             </a>
-                        @else
+                        @endif
+
+                        @if ($item->statut == 0 && $item->idgestion != $InfoActeur['id'])
+                            Carte transférée
+                        @endif
+
+                        @if ($item->statut == 2)
                             Carte transférée
                         @endif
 
