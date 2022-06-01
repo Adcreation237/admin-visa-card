@@ -48,6 +48,7 @@ Route::group(['middleware'=>['Makauth']], function(){
 
     //Gestion des utilisateurs
     Route::get('/marketing/users',[MarketingController::class, 'users'])->name('users');
+    Route::post('/marketing/add_users',[MarketingController::class, 'add_users'])->name('add_users');
 
     /*Route::post('/marketing/search_card',[MarketingController::class, 'search_card'])->name('search_card');*/
 });

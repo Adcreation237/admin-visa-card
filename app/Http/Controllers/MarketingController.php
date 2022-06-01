@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Acteurs;
 use App\Models\demandes;
+use App\Models\Roles;
 use App\Models\serieCard;
 use App\Models\VisaCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MarketingController extends Controller
 {
@@ -229,6 +231,64 @@ class MarketingController extends Controller
     {
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
         $users = Acteurs::all();
-        return view('marketing.users', $data)->with('users',$users);
+        $roles = Roles::all();
+        $code='';
+        foreach ($users as $value) {
+            $code = $value->code_acteur + 1;
+        }
+        return view('marketing.users', $data)
+                    ->with('users',$users)
+                    ->with('roles',$roles)
+                    ->with('code',$code);
+    }
+
+    public function add_users(Request $req)
+    {
+        //validate inputs
+        $req->validate([
+            'name_acteur'=>'required',
+            'role_acteur'=>'required',
+            'code_acteur'=>'required',
+            'agence'=>'required',
+        ]);
+        $password='';
+        // Initialisation des caractères utilisables
+        $characters = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+
+        for($i=0;$i<10;$i++)
+        {
+            $password .= ($i%2) ? strtoupper($characters[array_rand($characters)]) : $characters[array_rand($characters)];
+        }
+
+        $code_user = 0;
+        if (strlen($req->code_acteur)==2) {
+            $code_user = '0000'.$req->code_acteur;
+        }
+        if (strlen($req->code_acteur)==1) {
+            $code_user = '00000'.$req->code_acteur;
+        }
+
+
+        $sendStock = Roles::where('name', $req->role_acteur)
+                                ->limit(1)  // optional - to ensure only one record is updated.
+                                ->update(array('statut'=> Roles::raw('statut+1')));
+
+
+       $usersInsert = new Acteurs();
+       $usersInsert->name_acteur = $req->name_acteur;
+       $usersInsert->role_acteur = $req->role_acteur;
+       $usersInsert->code_acteur = $code_user;
+       $usersInsert->mdp_acteur = Hash::make($password);
+       $usersInsert->localisation = $req->agence;
+       $usersInsert->start = 'false';
+
+       $save = $usersInsert->save();
+
+        if ($save && $sendStock) {
+            return back()->with('success','utilisateur ajouté avec succès');
+        }else {
+            return back()->with('fail','Une erreur est survene, ressayez plutard');
+        }
+
     }
 }
