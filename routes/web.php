@@ -24,8 +24,8 @@ Route::group(['middleware'=>['Makauth']], function(){
     Route::get('/',[AuthController::class, 'login'])->name('login');
     Route::get('/logout',[AuthController::class, 'logout'])->name('login.logout');
     Route::get('/marketing',[MarketingController::class, 'marketing'])->name('marketing');
-    Route::get('/marketing/profile',[MarketingController::class, 'profile'])->name('profile');
-    Route::get('/marketing/settings',[MarketingController::class, 'setting'])->name('setting');
+    Route::get('/marketing/profile',[MarketingController::class, 'profile']);
+    Route::get('/marketing/settings',[MarketingController::class, 'setting']);
 
     //save card
     Route::get('/marketing/save-card',[MarketingController::class, 'save_card'])->name('save.card');
@@ -57,8 +57,8 @@ Route::group(['middleware'=>['Managerauth']], function(){
     Route::get('/',[AuthController::class, 'login'])->name('login');
     Route::get('/logout',[AuthController::class, 'logout'])->name('login.logout');
     Route::get('/branch_manager',[ManagerController::class, 'branch_manager'])->name('branch_manager');
-    Route::get('/branch_manager/profile',[ManagerController::class, 'profile'])->name('profile');
-    Route::get('/branch_manager/settings',[ManagerController::class, 'setting'])->name('setting');
+    Route::get('/branch_manager/profile',[ManagerController::class, 'profile']);
+    Route::get('/branch_manager/settings',[ManagerController::class, 'setting']);
 
     //Faire une demande et envoyer
     Route::get('/branch_manager/demander',[ManagerController::class, 'ask_card'])->name('demander');

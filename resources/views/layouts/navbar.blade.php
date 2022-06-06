@@ -45,10 +45,10 @@
                 aria-labelledby="navbarDropdownMenuAvatar"
             >
                 <li>
-                <a class="dropdown-item" href="{{ route('profile') }}">Mon profil</a>
+                <a class="dropdown-item" href="{{$InfoActeur['role_acteur']}}/profile">Mon profil</a>
                 </li>
                 <li>
-                <a class="dropdown-item" href="{{ route('setting') }}">Paramètres</a>
+                <a class="dropdown-item" href="{{$InfoActeur['role_acteur']}}/setting">Paramètres</a>
                 </li>
                 <li>
                 <a class="dropdown-item" href="{{ route('login.logout') }}">Se deconnecter</a>
