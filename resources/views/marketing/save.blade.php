@@ -93,6 +93,17 @@
                                 </div>
                                 <span class="text-danger">@error('last_num'){{$message}} @enderror</span>
                             </div>
+                            <div class="col">
+                                <!-- prix input -->
+                                <div class="form-outline">
+                                    @error('prix')
+                                        <i class="fas fa-exclamation-circle trailing text-danger"></i>
+                                    @enderror
+                                    <input type="number" id="prix" name="prix" class="form-control"/>
+                                    <label class="form-label" for="prix">Montant</label>
+                                </div>
+                                <span class="text-danger">@error('prix'){{$message}} @enderror</span>
+                            </div>
                         </div>
 
                         <!-- Add button -->

@@ -49,7 +49,7 @@ class AuthController extends Controller
                 if (($userInfo->start)=='true') {
                         $request->session()->put('acteursid', $userInfo->id);
                         $request->session()->put('acteurs', $userInfo->role_acteur);
-                        return redirect('/'.$userInfo->role_acteur.'/');
+                        return redirect('/'.$userInfo->role_acteur);
                 }else{
                     return back()->with('fail','Désolé ! Compte inactif, veuillez vous rapprocher de la Direction');
                 }

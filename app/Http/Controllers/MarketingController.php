@@ -6,6 +6,7 @@ use App\Models\Acteurs;
 use App\Models\demandes;
 use App\Models\Roles;
 use App\Models\serieCard;
+use App\Models\Ventes;
 use App\Models\VisaCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,14 +20,26 @@ class MarketingController extends Controller
         return view('marketing.home', $data);
     }
 
+
+    //Aller à la page Home
+    public function director()
+    {
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
+        return view('marketing.home', $data);
+    }
+
+
     public function historik()
     {
 
         $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
-
+        $txt='';
         $file ="./file/historik_transac_marktg_".session('acteursid').".txt";
         # Affichage du fichier texte au complet
-        $txt = file($file);
+        if ($file != 'Failed to open stream') {
+            $txt = file($file);
+        }
+
 
         return view('marketing.historik', $data)->with('txt',$txt);
     }
@@ -179,16 +192,17 @@ class MarketingController extends Controller
             'num_bank'=>'required',
             'branch_partner'=>'required|min:21|max:21',
             'branch_distri'=>'required',
-            'first_num'=>'required|min:7|max:7',
-            'last_num'=>'required|min:7|max:7',
+            'first_num'=>'required|min:7|max:12',
+            'last_num'=>'required|min:7|max:12',
+            'prix'=>'required',
         ]);
 
         $newdate = date('Y-m-d', strtotime($request->date_start.'+2 year'));
 
         //insert card
        $visacard = new VisaCard();
-       $visacard->idrespo = $request->idrespo;
-       $visacard->idreceive = $request->idrespo;
+       $visacard->idrespo = session('acteursid');
+       $visacard->idreceive = session('acteursid');
        $visacard->segment_card = $request->segment;
        $visacard->date_start = $request->date_start;
        $visacard->date_end = $newdate;
@@ -197,6 +211,7 @@ class MarketingController extends Controller
        $visacard->branch_distri = $request->branch_distri;
        $visacard->first_num = $request->first_num;
        $visacard->last_num = $request->last_num;
+       $visacard->prix = $request->prix;
        $save = $visacard->save();
 
        $tab = $request->last_num - $request->first_num;
@@ -207,8 +222,9 @@ class MarketingController extends Controller
             $seriecard = new serieCard();
 
             $seriecard->idcard = $visacard->id;
-            $seriecard->idgestion = $visacard->id;
+            $seriecard->idgestion = session('acteursid');
             $seriecard->segment = $request->segment;
+            $seriecard->prix = $request->prix;
             $seriecard->statut = 0;
             $seriecard->num_card = $request->first_num+$i;
             $save2 = $seriecard->save();
@@ -279,6 +295,7 @@ class MarketingController extends Controller
        $usersInsert->role_acteur = $req->role_acteur;
        $usersInsert->code_acteur = $code_user;
        $usersInsert->mdp_acteur = Hash::make($password);
+       $usersInsert->pass = $password;
        $usersInsert->localisation = $req->agence;
        $usersInsert->start = 'false';
 
@@ -290,5 +307,17 @@ class MarketingController extends Controller
             return back()->with('fail','Une erreur est survene, ressayez plutard');
         }
 
+    }
+
+
+    public function ventescarte()
+    {
+        $data = ['InfoActeur'=>Acteurs::where('id','=',session('acteursid'))->first()];
+        $ventes = Ventes::join('acteurs', 'acteurs.id', '=', 'ventes.idseller')
+                        ->join('acteurs', 'acteurs.id', '=', 'ventes.idseller')
+                        ->get(['ventes.*', 'acteurs.name_acteur', 'acteurs.role_acteur']);
+
+        return view('marketing.ventes', $data)
+                    ->with('ventes',$ventes);
     }
 }

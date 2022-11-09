@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +51,8 @@ Route::group(['middleware'=>['Makauth']], function(){
     Route::get('/marketing/users',[MarketingController::class, 'users'])->name('users');
     Route::post('/marketing/add_users',[MarketingController::class, 'add_users'])->name('add_users');
 
-    /*Route::post('/marketing/search_card',[MarketingController::class, 'search_card'])->name('search_card');*/
+    //Consultation des ventes
+    Route::get('/marketing/ventes',[MarketingController::class, 'ventescarte'])->name('add_users');
 });
 
 Route::group(['middleware'=>['Managerauth']], function(){
@@ -107,4 +109,15 @@ Route::group(['middleware'=>['Distributorauth']], function(){
 
 
     Route::post('/distributor/selling',[DistributorController::class, 'selling'])->name('selling');
+
+
+    Route::get('/director/',[DirectorController::class, 'director'])->name('director');
+});
+
+
+Route::group(['middleware'=>['Directorauth']], function(){
+    Route::get('/',[AuthController::class, 'login'])->name('login');
+    Route::get('/logout',[AuthController::class, 'logout'])->name('login.logout');
+
+    Route::get('/director/',[DirectorController::class, 'director'])->name('director');
 });

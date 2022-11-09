@@ -70,7 +70,6 @@
                         <th scope="col">localisation</th>
                         <th scope="col">Actif</th>
                         <th scope="col">Date creation</th>
-                        <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,7 +82,6 @@
                             <td>{{ $item->localisation }}</td>
                             <td>{{ $item->start }}</td>
                             <td>{{ $item->created_at }}</td>
-                            <td><a href="/marketing/share/{{$item->id}}" title="Transmettre" style="font-size: 20px;"><i class="bi bi-arrow-clockwise"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

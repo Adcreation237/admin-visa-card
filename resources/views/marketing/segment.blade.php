@@ -21,6 +21,7 @@
               <th scope="col">Branche</th>
               <th scope="col">Distribution</th>
               <th scope="col">Series</th>
+              <th scope="col">Montant (en FCFA)</th>
             </tr>
           </thead>
           <tbody>
@@ -33,6 +34,7 @@
                     <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->branch_partner }}</a></td>
                     <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->branch_distri }}</a></td>
                     <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->first_num }} - {{ $item->last_num }}</a></td>
+                    <td><a href="/marketing/seg-card-detail/{{$item->id}}">{{ $item->prix}}</a></td>
                 </tr>
             @endforeach
           </tbody>

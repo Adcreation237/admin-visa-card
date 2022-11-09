@@ -45,6 +45,28 @@
                 </div>
             </div>
         </div>
+        <div class="col-4 p-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title mb-4">Enregistrement des cartes</h5>
+                  <p class="card-text" style="font-size: 12px; text-align: justify">Cet enregistrement
+                    se fait suivant un segment precis et une série de carte précise. Veuillez bien lire
+                    avant de valider !</p>
+                  <a href="#" class="card-link">Commencer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title mb-4">Enregistrement des cartes</h5>
+                  <p class="card-text" style="font-size: 12px; text-align: justify">Cet enregistrement
+                    se fait suivant un segment precis et une série de carte précise. Veuillez bien lire
+                    avant de valider !</p>
+                  <a href="#" class="card-link">Commencer</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

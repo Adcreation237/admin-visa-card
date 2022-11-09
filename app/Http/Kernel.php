@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'Makauth' => \App\Http\Middleware\MarketingCheck::class,
         'Managerauth' => \App\Http\Middleware\ManagerCheck::class,
         'Distributorauth' => \App\Http\Middleware\DistributorCheck::class,
+        'Directorauth' => \App\Http\Middleware\DirectorMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

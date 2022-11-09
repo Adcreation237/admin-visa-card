@@ -135,6 +135,18 @@ class DistributorController extends Controller
                                 ->where('segment','=',$req->segment)
                                 ->limit(1)
                                 ->update($arry);
+
+        //$ventes = new Ventes();
+        
+        /*$ventes->idseller = session('acteursid');
+        $ventes->idcard = $req->idsegment;
+        $ventes->annee = ;
+        $ventes->mois = ;
+        $ventes->jour = ;
+        $ventes->qte = ;
+        $ventes->montant = ;
+        $save = $ventes->save();*/
+
         if ($update) {
             return back()->with('success','Carte attribuée avec succès !');
             }else {

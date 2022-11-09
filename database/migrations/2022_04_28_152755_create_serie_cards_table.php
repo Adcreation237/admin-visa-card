@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idcard');
             $table->unsignedBigInteger('idgestion');
             $table->string('segment');
+            $table->string('prix');
             $table->string('num_card');
             $table->string('receive')->nullable();
             $table->string('num_cmpt')->nullable();

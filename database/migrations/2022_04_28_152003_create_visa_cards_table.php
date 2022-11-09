@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idrespo');
             $table->unsignedBigInteger('idreceive');
             $table->string('segment_card');
+            $table->string('prix');
             $table->string('date_start');
             $table->string('date_end');
             $table->string('num_bank');
